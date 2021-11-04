@@ -2,7 +2,9 @@
 
 Evader is a 2D game built in Unity Engine in which the sigma male have to stay away from bomb in order to keep grinding...
 
-![GamePlay_GIF](Images/GamePlay.gif)
+<p align="center">
+  <img src="Images/GamePlay.gif" alt="animated" />
+</p>
 
 ## Screeshots
 
