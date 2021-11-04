@@ -13,6 +13,23 @@ public class Health : MonoBehaviour
     public Sprite fullHeart;
     public Sprite emptyHeart;
 
+    public Animator deathAnim;
+
+    public AudioSource gameOverSound;
+
+    public GameObject gameOnUI;
+    public GameObject gameOverUI;
+
+    public static Health instance { get; private set; }
+
+    private void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+        }
+    }
+
     void Update()
     {
         // If the player's health is greater than max health, set it to max health
@@ -26,21 +43,49 @@ public class Health : MonoBehaviour
             // If the player's health is greater than the current heart, display the full heart
             if (i < health)
             {
-                heartsArray[i].sprite = fullHeart;
+                try
+                {
+                    heartsArray[i].sprite = fullHeart;
+                }
+                catch
+                {
+                    // Debug.Log("Error: No full heart found");
+                }
             }
             else
-            {
-                heartsArray[i].sprite = emptyHeart;
+            {   
+                try
+                {
+                    heartsArray[i].sprite = emptyHeart;
+                }
+                catch
+                {
+                    // Debug.Log("Error: No empty heart found");
+                }
             }
 
             // Hide the extra hearts
             if (i < hearts)
             {
-                heartsArray[i].enabled = true;
+                try
+                {
+                    heartsArray[i].enabled = true;
+                }
+                catch
+                {
+                    // Debug.Log("Error: No heart found");
+                }
             }
             else
             {
-                heartsArray[i].enabled = false;
+                try
+                {
+                    heartsArray[i].enabled = false;
+                }
+                catch
+                {
+                    // Debug.Log("Error: No heart found");
+                }
             }
         }
     }
@@ -55,8 +100,22 @@ public class Health : MonoBehaviour
 
         if (health <= 0)
         {
-            Debug.Log(health);
-            SceneManager.LoadScene(0);
+            // Play death animation
+            deathAnim.SetBool("is_dead", true);
+            
+            // God lifting the player up
+            GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+            GetComponent<Rigidbody2D>().gravityScale = -1;
+            GetComponent<Rigidbody2D>().isKinematic = false;
+
+            // Play death sound
+            gameOverSound.Play();
+
+            // Disable normal GUI
+            gameOnUI.SetActive(false);
+
+            // Enable game over GUI
+            gameOverUI.SetActive(true);
         }
     }
 }

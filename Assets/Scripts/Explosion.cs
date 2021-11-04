@@ -23,7 +23,7 @@ public class Explosion : MonoBehaviour
             GetComponent<Rigidbody2D>().isKinematic = false;
 
             // Destroy the bomb after the animation is done
-            Destroy(gameObject, 1f);
+            Destroy(gameObject, 0.5f);
         } else if (ground.gameObject.tag == "Player")
         {
             // Play the explosion animation

@@ -9,6 +9,7 @@ public class Score : MonoBehaviour
     public int highScore = 0;
 
     public TextMeshProUGUI scoreText;
+    public TextMeshProUGUI finalScoreText;
 
     // Set the score to 0
     public void Start()
@@ -19,23 +20,17 @@ public class Score : MonoBehaviour
     // Update the score
     public void AddScore(int amount)
     {
-        score += amount;
-        if (score > highScore)
+        if (Health.instance.health > 0)
         {
-            highScore = score;
+            score += amount;
         }
-    }
-
-    // Reset the score
-    public void ResetScore()
-    {
-        score = 0;
     }
 
     // Print the score
     public void PrintScore(int score)
     {
         scoreText.text = score.ToString();
+        finalScoreText.text = "Your Score: " + score;
         // Debug.Log("Score: " + score);
     }
 

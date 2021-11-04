@@ -23,7 +23,11 @@ public class Spawner : MonoBehaviour
         Vector2 spawn_position = new Vector2(Random.Range(minX, maxX), transform.position.y);
         Instantiate(bomb_prefab, spawn_position, Quaternion.identity);
 
-        // call SpawnBomb again
-        StartCoroutine(SpawnBomb());
+        // call SpawnBomb() again if the game is not over   
+        if (Health.instance.health > 0)
+        {
+            // Debug.Log(Health.instance.health);
+            StartCoroutine(SpawnBomb());
+        }
     }
 }
