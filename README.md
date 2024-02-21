@@ -1,5 +1,9 @@
 # Evader
 
+## !! ARCHIVE !!
+
+This repo is archive now and no more updates will be done anymore. It will act as poc for my starting of GD journey.
+
 Evader is a 2D game built in Unity Engine in which the sigma male have to stay away from bomb in order to keep grinding...
 
 <p align="center">
